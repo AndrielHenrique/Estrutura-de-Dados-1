@@ -13,12 +13,12 @@ int main()
     int val = 0;
     int maiorValor = 0, menorValor = 0;
 
-    printf("Digite quantos numeros vai ter na sequencia: \n");
+    printf("\nDigite quantos numeros vai ter na sequencia: ");
     scanf("%d", &n);
 
     for (int i = 0; i < n; i++)
     {
-        printf("Digite o %do numero da sequencia\n", i + 1);
+        printf("\nDigite o %do numero da sequencia: ", i + 1);
         scanf("%d", &val);
 
         if (i == 0)
