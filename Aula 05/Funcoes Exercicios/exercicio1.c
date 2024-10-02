@@ -6,23 +6,18 @@ primos entre 0 e m*/
 #include <stdlib.h>
 
 
-int primosM(m){
+void primosM(m){
     int i;
     
-    if(m == 1)
-        return 0;
-    i = 2;
-    while(i < (m/(2+1))){
-        if(m % i == 0){
+    for(i = 0; i< m/(2+1); i++){
+        if(m % i == 0)
             return 0;
-            } 
         else{
             printf(" %d ", i);
         }
     }
-    return 1;
-    
 }
+
 int main(){
     int m;
     printf("Informe m: ");
