@@ -23,7 +23,7 @@ float serie(int n){
     int i;
 
     for(i = 1; i<=n;i++){
-        resultado += 1/fatorial(i);
+        resultado += (float)1/fatorial(i);
     }
     return resultado;
 }
