@@ -87,18 +87,26 @@ void menu()
                 printf("\nNumeros primos entre 0 e %d: ", m);
                 lerPrimos(m);
             }
+            else
+                printf("\nM tem que ser positivo e maior que zero\n");
             break;
         case 2:
             printf("\nExercicio 2: Area do quadrado");
             printf("\nInforme o lado do quadrado: ");
             scanf("%d", &lado);
-            printf("A area do quadrado eh: %d", areaQuadrado(lado));
+            if (lado > 0)
+                printf("A area do quadrado eh: %d", areaQuadrado(lado));
+            else
+                printf("\nInforme o lado positivo e maior que zero\n");
             break;
         case 3:
             printf("\nExercicio 3: Soma de 1 a n");
             printf("\nInforme N: ");
             scanf("%d", &n);
-            printf("\nA soma dos N primeiros inteiros positivos deu: %d", somaN(n));
+            if (n > 0)
+                printf("\nA soma dos N primeiros inteiros positivos deu: %d", somaN(n));
+            else
+                printf("\nN tem que ser positivo e maior que zero\n");
             break;
         case 4:
             printf("\nExercicio 4: Multiplos de 5");
@@ -109,6 +117,8 @@ void menu()
                 printf("\nMultiplos de 5 entre 0 e %d: ", n);
                 multiplos(n);
             }
+            else
+                printf("\nN tem que ser positivo e maior que zero\n");
             break;
         case 5:
             printf("Saindo");
