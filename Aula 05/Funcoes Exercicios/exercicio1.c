@@ -5,27 +5,45 @@ primos entre 0 e m*/
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void primosM(m){
+int primosM(int m)
+{
     int i;
-    
-    for(i = 0; i< m/(2+1); i++){
-        if(m % i == 0)
+
+    if (m <= 2)
+        return 0;
+
+    i = 2;
+    while (i < (m / 2 + 1))
+    {
+        if (m % i == 0)
+        {
             return 0;
-        else{
-            printf(" %d ", i);
         }
+        i++;
+    }
+
+    return 1;
+}
+
+void lerPrimos(int m)
+{
+    int i;
+    for (i = 2; i < m; i++)
+    {
+        if (primosM(i))
+            printf(" %d ", i);
     }
 }
 
-int main(){
+int main()
+{
     int m;
     printf("Informe m: ");
     scanf("%d", &m);
 
-    if(m>0){
-        printf("Numeros primos entre 0 e %d,", m);
-        primosM(m);
+    if (m > 0)
+    {
+        printf("Numeros primos entre 0 e %d: ", m);
+        lerPrimos(m);
     }
-    
 }
