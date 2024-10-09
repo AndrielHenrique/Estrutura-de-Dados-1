@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int primo(int n){// 1 se primo ou 0 se nao primo
-    int n = 2;
+    int i = 2;
     while(i<n/2+1){
         if(n % i == 0)
             return 0;
