@@ -18,4 +18,5 @@ int main()
     printf("Informe n2: ");
     scanf("%d", &b);
     printf("A soma sucessiva deu: %d", Multip(0, a, b));
+    
 }
