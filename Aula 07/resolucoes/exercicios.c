@@ -34,7 +34,7 @@ void printNa0(int n){
         printf("%d", n);
     else{
         printf("%d", n);
-        print0aN(n - 1);
+        printNa0(n - 1);
     }
 }
 //Exercicio 6
