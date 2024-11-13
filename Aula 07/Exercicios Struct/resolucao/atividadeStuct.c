@@ -50,13 +50,22 @@ Aluno lerAluno(){
     return aluno;
 }
 
+float mediaAluno(Aluno aluno){
+    int i;
+    float soma = 0;
+    for(i = 0; i< 4; i++){
+        soma += aluno.notas[i];
+    }
+    return soma/4;
+}
+
 void exibirAluno(Aluno aluno){
     int i;
-    printf("\n%d\t%s\t\t%d\t%s\t\t%d\t%.2f\t%.2f\t%.2f\t%.2f", aluno.ra, aluno.nome, aluno.idade, aluno.curso, aluno.anoInicio,aluno.notas[0],aluno.notas[1],aluno.notas[2], aluno.notas[3]);
+    printf("\n%d\t%s\t\t%d\t%s\t\t%d\t%.2f\t%.2f\t%.2f\t%.2f,\t%.2f", aluno.ra, aluno.nome, aluno.idade, aluno.curso, aluno.anoInicio,aluno.notas[0],aluno.notas[1],aluno.notas[2], aluno.notas[3], mediaAluno(aluno));
 }
 
 void cabecalhoAluno(){
-    printf("\nRA\tNOME\t\tIDADE\tCURSO\t\tINICIO\tN1\tN2\tN3\tN4");
+    printf("\nRA\tNOME\t\tIDADE\tCURSO\t\tINICIO\tN1\tN2\tN3\tN4\tMD");
 }
 
 void exibirTurma(Aluno turma[], int qtdAlunos){
@@ -74,15 +83,6 @@ int buscarAlunoRA(Aluno turma, int qtdAlunos, int ra){
             return i;
     }
     return -1;
-}
-
-float mediaAluno(Aluno aluno){
-    int i;
-    float soma = 0;
-    for(i = 0; i< 4; i++){
-        soma += aluno.notas[i];
-    }
-    return soma/4;
 }
 
 int alunoMaiorMedia(Aluno turma[], int qtdAlunos){
@@ -133,6 +133,11 @@ int main(){
                         printf("\nTurma vazia!!");
                 break;
             case 4:
+                if(qtdAlunos > 0){
+                    cabecalhoAluno();
+                    exibirAluno(turma[alunoMaiorMedia(turma, qtdAlunos)]);
+                }else
+                        printf("\nTurma vazia!!");
                 break;
             case 5:
                 break;
