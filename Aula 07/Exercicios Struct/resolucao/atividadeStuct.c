@@ -34,7 +34,7 @@ Aluno lerAluno(){
     scanf("%d", &aluno.ra);
     getchar(); //fflush(stdin)
     printf("\nInforme o nome: ");
-    //fgets(aluno.nome, 50, stdin);
+    fgets(aluno.nome, 50, stdin);
     printf("\nInforme a idade: ");
     scanf("%d", &aluno.idade);
     getchar();
@@ -76,7 +76,7 @@ void exibirTurma(Aluno turma[], int qtdAlunos){
     }
 }
 
-int buscarAlunoRA(Aluno turma, int qtdAlunos, int ra){
+int buscarAlunoRA(Aluno turma[], int qtdAlunos, int ra){
     int i;
     for(i = 0; i <qtdAlunos; i++){
         if(turma[i].ra == ra)
