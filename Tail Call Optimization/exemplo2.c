@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void contador(int a)
+int contador(int a)
 {
+    if (a == 100000)
+        return a;
     printf("\n%d", a);
-    contador(a + 1);
+    return a + contador(a + 1);
 }
 
 int main()

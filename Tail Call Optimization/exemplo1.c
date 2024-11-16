@@ -3,6 +3,8 @@
 
 void contador(int a)
 {
+    if (a == 100000)
+        return;
     printf("\n%d", a);
     contador(a + 1);
 }
