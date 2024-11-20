@@ -122,6 +122,20 @@ int alunoMaiorMedia(Aluno turma[], int qtdAlunos)
         return indiceAlunoMaiorMedia;
 }
 
+float mediaDaTurma(Aluno turma[], int qtdAlunos){
+    float media = 0;
+    int i;
+    for(i = 0; i<0; i++)
+        media += mediaAluno(turma[i])/qtdAlunos;
+    return media;
+}
+
+void deletarAluno(Aluno turma[], int qtdAlunos, int posAluno){
+    int i;
+    for(i = posAluno; i<qtdAlunos;i++)
+        turma[i] = turma[i + 1]; //turma[14] = turma[15]
+}
+
 int main()
 {
     int *tam;
@@ -183,24 +197,37 @@ int main()
                 printf("\nTurma vazia!!");
             break;
         case 4:
-            if (qtdAlunos > 0)
-            {
-                cabecalhoAluno();
-                exibirAluno(turma[alunoMaiorMedia(turma, qtdAlunos)]);
-            }
-            else
-                printf("\nTurma vazia!!");
-            break;
+                if(qtdAlunos > 0){
+                    cabecalhoAluno();
+                    exibirAluno(turma[alunoMaiorMedia(turma, qtdAlunos)]);
+                }else
+                    printf("\nTurma vazia!!");
+                break;
         case 5:
-            break;
+                if(qtdAlunos > 0){
+                    printf("\nMedia da turma: %.2f", mediaDaTurma(turma, qtdAlunos));
+
+                }else
+                    printf("\nTurma vazia!!");
+                break;
         case 6:
-            break;
+                if(qtdAlunos > 0){
+                    printf("\nInforme o RA: ");
+                    scanf("%d", &ra);
+                    int posAluno = buscarAlunoRA(turma, qtdAlunos, ra);
+                    if(posAluno >= 0){
+                        deletarAluno(turma, qtdAlunos--, posAluno);
+                    }else
+                        printf("\nRA nao encontrado!!");
+                }else
+                        printf("\nTurma vazia!!");
+                break;
         case 7:
-            printf("saindo...");
-            free(tam);
-            break;
-        default:
-            break;
+                printf("\nSaindo...");
+                break;
+        default:   
+                printf("\nInforme uma opcao valida entre 1 a 7!");
+                break;
         }
 
     } while (op != 7);
