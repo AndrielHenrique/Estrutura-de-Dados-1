@@ -36,15 +36,17 @@ int maiorDoVetor(int vetor[], int contador)
     return (vetor[contador - 1] > maior ? vetor[contador - 1] : maior);
 }
 
-/* 3. 
-*/
-typedef struct{
+/* 3.
+ */
+typedef struct
+{
     char nome[50];
     int notaS;
-    int notaE
+    int notaE;
 } Alunos;
 
-Alunos lerAluno(){
+Alunos lerAluno()
+{
     Alunos aluno;
     printf("\nInforme o nome do Aluno: ");
     getchar();
@@ -52,22 +54,42 @@ Alunos lerAluno(){
     printf("\nInforme a nota obtida ao longo do semestre: ");
     scanf("%d", &aluno.notaS);
     printf("\nInforme a nota obtida na avaliacao especial: ");
-    scanf("%d",&aluno.notaE);
+    scanf("%d", &aluno.notaE);
 
     return aluno;
 }
-void exibirAluno(Alunos aluno){
-	printf("\t\nNome do Aluno %s", aluno.nome);
-    printf("\t\nNota do aluno ao longo do semestre: %d", aluno.notaE);
-    printf("\t\nNota do aluno na avalicao especial: %d", aluno.notaS); 
+
+float mediaAluno(Alunos aluno)
+{
+    float media = 0;
+    media += aluno.notaE + aluno.notaS;
+    return media / 2;
+}
+float mediaMedias(Alunos turma[], int qtdALunos)
+{
+    float media = 0;
+    int i;
+    for (i = 0; i < qtdALunos; i++)
+        media += mediaAluno(turma[i]) / qtdALunos;
+    return media;
 }
 
-void exibirTurma(Alunos alunos[],int qtdAlunos){
-    if(qtdAlunos == 0)
+void exibirAluno(Alunos aluno)
+{
+    printf("\t\nNome do Aluno %s", aluno.nome);
+    printf("\t\nNota do aluno ao longo do semestre: %d", aluno.notaE);
+    printf("\t\nNota do aluno na avalicao especial: %d", aluno.notaS);
+    printf("\t\nMedia final: %.2f", mediaAluno(aluno));
+}
+
+void exibirTurma(Alunos alunos[], int qtdAlunos)
+{
+    if (qtdAlunos == 0)
         return;
     exibirTurma(alunos, qtdAlunos - 1);
-    exibirAluno(alunos[qtdAlunos]);
+    exibirAluno(alunos[qtdAlunos - 1]);
 }
+
 int main()
 {
     // Dec2Bin(12);
@@ -77,29 +99,45 @@ int main()
     // Dec2Bin(3);
 
     int vetor[] = {8, 12, 133, 155, 18, 1, 2, 3, 21, 6};
-    int tam = 10, op, tamTurma = 10, qtdAlunos;
+    int tam = 10, op, tamTurma = 10, qtdAlunos = 0;
     Alunos turma[tamTurma];
     Alunos temp;
-    // printf("%d", maiorDoVetor(vetor, tam));
-    do{
-        printf("\n1, 2 ou 3: ");
+    printf("%d", maiorDoVetor(vetor, tam));
+    do
+    {
+        printf("\n1, 2, 3 ou 4: ");
         scanf("%d", &op);
-    switch(op){
-        case 1: 
+        switch (op)
+        {
+        case 1:
+            if (qtdAlunos <= tamTurma)
+            {
                 temp = lerAluno();
                 turma[qtdAlunos++] = temp;
+            }
+            else
+                printf("\nTurma cheia.");
             break;
         case 2:
-            exibirTurma(turma, qtdAlunos);
+            if (qtdAlunos > 0)
+                exibirTurma(turma, qtdAlunos);
+            else
+                printf("\nTurma vazia.");
             break;
         case 3:
+            if (qtdAlunos > 0)
+                printf("%.2f Media", mediaMedias(turma, qtdAlunos));
+            else
+                printf("\nTurma vazia.");
+            break;
+        case 4:
             printf("\nsaindo..");
             break;
-        default:    
-            printf("\n1 a 3");
-            break;  
-    }
-    }while(op != 3);
+        default:
+            printf("\n1 a 4");
+            break;
+        }
+    } while (op != 4);
 
     return 0;
 }
