@@ -78,7 +78,7 @@ void cabecalhoAluno()
     printf("\nRA\tNOME\t\tIDADE\tCURSO\t\tINICIO\tN1\tN2\tN3\tN4\tMD");
 }
 
-void exibirTurma(Aluno turma[], int qtdAlunos)
+void exibirTurma(Aluno *turma, int qtdAlunos)
 {
     // int i;
     // cabecalhoAluno();
@@ -93,7 +93,7 @@ void exibirTurma(Aluno turma[], int qtdAlunos)
     exibirAluno(turma[qtdAlunos - 1]);
 }
 
-int buscarAlunoRA(Aluno turma[], int qtdAlunos, int ra)
+int buscarAlunoRA(Aluno *turma, int qtdAlunos, int ra)
 {
     // int i;
     // for (i = 0; i < qtdAlunos; i++)
@@ -109,7 +109,7 @@ int buscarAlunoRA(Aluno turma[], int qtdAlunos, int ra)
     return buscarAlunoRA(turma, qtdAlunos - 1, ra);
 }
 
-int alunoMaiorMedia(Aluno turma[], int qtdAlunos)
+int alunoMaiorMedia(Aluno *turma, int qtdAlunos)
 {
     if (qtdAlunos == 1) // qtdAlunos -1 como indice
         return 0;
@@ -122,38 +122,38 @@ int alunoMaiorMedia(Aluno turma[], int qtdAlunos)
         return indiceAlunoMaiorMedia;
 }
 
-float mediaDaTurma(Aluno turma[], int qtdAlunos){
+float mediaDaTurma(Aluno *turma, int qtdAlunos)
+{
     float media = 0;
     int i;
-    for(i = 0; i<0; i++)
-        media += mediaAluno(turma[i])/qtdAlunos;
+    for (i = 0; i < qtdAlunos; i++)
+        media += mediaAluno(turma[i]) / qtdAlunos;
     return media;
 }
 
-void deletarAluno(Aluno turma[], int qtdAlunos, int posAluno){
+void deletarAluno(Aluno *turma, int qtdAlunos, int posAluno)
+{
     int i;
-    for(i = posAluno; i<qtdAlunos;i++)
-        turma[i] = turma[i + 1]; //turma[14] = turma[15]
+    for (i = posAluno; i < qtdAlunos; i++)
+        turma[i] = turma[i + 1]; // turma[14] = turma[15]
 }
 
 int main()
 {
-    int *tam;
     int tamanho;
 
     printf("Qual o tamanho da turma?");
     scanf("%d", &tamanho);
 
-    tam = (int *)(malloc(tamanho * sizeof(int)));
+    Aluno *turma = (Aluno *)(malloc(tamanho * sizeof(int)));
 
-    if (tam == NULL)
+    if (turma == NULL)
     {
         printf("Erro de alocacao de memoria.");
         system("pause");
         exit(1);
     }
 
-    Aluno turma[tamanho];
     Aluno temp;
     int qtdAlunos = 0, ra;
     int op;
@@ -197,37 +197,45 @@ int main()
                 printf("\nTurma vazia!!");
             break;
         case 4:
-                if(qtdAlunos > 0){
-                    cabecalhoAluno();
-                    exibirAluno(turma[alunoMaiorMedia(turma, qtdAlunos)]);
-                }else
-                    printf("\nTurma vazia!!");
-                break;
+            if (qtdAlunos > 0)
+            {
+                cabecalhoAluno();
+                exibirAluno(turma[alunoMaiorMedia(turma, qtdAlunos)]);
+            }
+            else
+                printf("\nTurma vazia!!");
+            break;
         case 5:
-                if(qtdAlunos > 0){
-                    printf("\nMedia da turma: %.2f", mediaDaTurma(turma, qtdAlunos));
-
-                }else
-                    printf("\nTurma vazia!!");
-                break;
+            if (qtdAlunos > 0)
+            {
+                printf("\nMedia da turma: %.2f", mediaDaTurma(turma, qtdAlunos));
+            }
+            else
+                printf("\nTurma vazia!!");
+            break;
         case 6:
-                if(qtdAlunos > 0){
-                    printf("\nInforme o RA: ");
-                    scanf("%d", &ra);
-                    int posAluno = buscarAlunoRA(turma, qtdAlunos, ra);
-                    if(posAluno >= 0){
-                        deletarAluno(turma, qtdAlunos--, posAluno);
-                    }else
-                        printf("\nRA nao encontrado!!");
-                }else
-                        printf("\nTurma vazia!!");
-                break;
+            if (qtdAlunos > 0)
+            {
+                printf("\nInforme o RA: ");
+                scanf("%d", &ra);
+                int posAluno = buscarAlunoRA(turma, qtdAlunos, ra);
+                if (posAluno >= 0)
+                {
+                    deletarAluno(turma, qtdAlunos--, posAluno);
+                }
+                else
+                    printf("\nRA nao encontrado!!");
+            }
+            else
+                printf("\nTurma vazia!!");
+            break;
         case 7:
-                printf("\nSaindo...");
-                break;
-        default:   
-                printf("\nInforme uma opcao valida entre 1 a 7!");
-                break;
+            printf("\nSaindo...");
+            free(turma);
+            break;
+        default:
+            printf("\nInforme uma opcao valida entre 1 a 7!");
+            break;
         }
 
     } while (op != 7);
