@@ -88,8 +88,8 @@ void exibirTurma(Aluno *turma, int qtdAlunos)
     // }
     if (qtdAlunos == 0)
         return;
-    exibirTurma(turma, qtdAlunos - 1);
     cabecalhoAluno();
+    exibirTurma(turma, qtdAlunos - 1);
     exibirAluno(turma[qtdAlunos - 1]);
 }
 
@@ -145,7 +145,7 @@ int main()
     printf("Qual o tamanho da turma?");
     scanf("%d", &tamanho);
 
-    Aluno *turma = (Aluno *)(malloc(tamanho * sizeof(int)));
+    Aluno *turma = (Aluno *)(malloc(tamanho * sizeof(Aluno)));
 
     if (turma == NULL)
     {
