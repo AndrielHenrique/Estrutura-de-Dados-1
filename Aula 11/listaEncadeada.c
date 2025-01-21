@@ -70,7 +70,7 @@ Lista *excluir(Lista *l, int num)
         printf("\nNao foi encontrado o numero.");
         return NULL;
     }
-    if (l->info == num)
+    else if (l->info == num)
     {
         Lista *prox = l->prox;
         free(l);
