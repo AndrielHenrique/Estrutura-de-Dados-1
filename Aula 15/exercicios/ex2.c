@@ -82,6 +82,7 @@ int main()
 {
     Pilha *p = NULL;
     Pilha *aux = NULL;
+    Pilha *p2 = NULL;
     int v, op, i;
     do
     {
@@ -106,9 +107,17 @@ int main()
             {
                 v = pop(&p);
                 push(&aux, v);
+                push(&p2, v);
             } while (!pilhaVazia(p));
             printf("Pilha invertida! \n");
             imprime(aux);
+            printf("\n-----------\nPilha original\n");
+            do
+            {
+                v = pop(&p2);
+                push(&p, v);
+            } while (!pilhaVazia(p2));
+            imprime(p);
             break;
         case 3:
             printf("Saindo... \n");
