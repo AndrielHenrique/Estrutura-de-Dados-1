@@ -83,7 +83,7 @@ int popInicio(Deque *d)
     else
     {
         d->ini = temp->next;
-        d->fim->ant = NULL;
+        d->ini->ant = NULL;
     }
 
     free(temp);
