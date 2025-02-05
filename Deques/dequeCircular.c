@@ -43,21 +43,40 @@ No *inserirNo(int v)
 void pushInicio(Deque *d, int v)
 {
     No *novo = inserirNo(v);
-    novo->next = d->head->next;
-    novo->ant = d->head;
-    d->head->next->ant = novo;
-    d->head->next = novo;
+    if (dequeVazio(d)) // Se estiver vazio, o novo nó será o único elemento
+    {
+        novo->next = d->head;
+        novo->ant = d->head;
+        d->head->next = novo;
+        d->head->ant = novo;
+    }
+    else // Caso contrário, insere no início normalmente
+    {
+        novo->next = d->head->next;
+        novo->ant = d->head;
+        d->head->next->ant = novo;
+        d->head->next = novo;
+    }
 }
 
 void pushFim(Deque *d, int v)
 {
     No *novo = inserirNo(v);
-    novo->ant = d->head->ant;
-    novo->next = d->head;
-    d->head->ant->next = novo;
-    d->head->ant = novo;
+    if (dequeVazio(d))
+    {
+        novo->next = d->head;
+        novo->ant = d->head;
+        d->head->next = novo;
+        d->head->ant = novo;
+    }
+    else
+    {
+        novo->ant = d->head->ant;
+        novo->next = d->head;
+        d->head->ant->next = novo;
+        d->head->ant = novo;
+    }
 }
-
 int popInicio(Deque *d)
 {
     if (dequeVazio(d))
@@ -68,7 +87,7 @@ int popInicio(Deque *d)
     No *remover = d->head->next;
     int v = remover->info;
 
-    if (remover == d->head->ant) // se tiver so 1 elemento, ela vai apontar pro head dnv
+    if (remover == d->head->ant) // se tiver 1 elemento, ela vai apontar pro head dnv
     {
         d->head->next = d->head;
         d->head->ant = d->head;
@@ -92,7 +111,7 @@ int popFim(Deque *d)
     No *remover = d->head->ant;
     int v = remover->info;
 
-    if (remover == d->head->next) // se tiver so 1 elemento, ela vai apontar pro head dnv
+    if (remover == d->head->next) // se tiver 1 elemento, ela vai apontar pro head dnv
     {
         d->head->next = d->head;
         d->head->ant = d->head;
