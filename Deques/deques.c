@@ -83,7 +83,7 @@ int popInicio(Deque *d)
     else
     {
         d->ini = temp->next;
-        d->fim->ant = NULL;
+        d->ini->ant = NULL;
     }
 
     free(temp);
@@ -137,6 +137,9 @@ void consultarFim(Deque *d)
 
 void liberarDeque(Deque *d) // igual a de uma fila
 {
+    if (dequeVazio(d))
+        return;
+
     No *q = d->ini;
     No *t;
     while (q != NULL)
