@@ -67,8 +67,17 @@ int popInicio(Deque *d)
     }
     No *remover = d->head->next;
     int v = remover->info;
-    d->head->next = remover->next;
-    remover->next->ant = d->head;
+
+    if (remover == d->head->ant) // se tiver so 1 elemento, ela vai apontar pro head dnv
+    {
+        d->head->next = d->head;
+        d->head->ant = d->head;
+    }
+    else
+    {
+        d->head->next = remover->next;
+        remover->next->ant = d->head;
+    }
     free(remover);
     return v;
 }
@@ -82,8 +91,17 @@ int popFim(Deque *d)
     }
     No *remover = d->head->ant;
     int v = remover->info;
-    d->head->ant = remover->ant;
-    remover->ant->next = d->head;
+
+    if (remover == d->head->next) // se tiver so 1 elemento, ela vai apontar pro head dnv
+    {
+        d->head->next = d->head;
+        d->head->ant = d->head;
+    }
+    else
+    {
+        d->head->ant = remover->ant;
+        remover->ant->next = d->head;
+    }
     free(remover);
     return v;
 }
